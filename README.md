@@ -6,6 +6,8 @@
 读取已解密的聊天副本，把消息折算成 Token，提供实时大屏、联系人额度、邮件提醒、
 年度频率热力图和语音转写，帮助你理解自己的聊天成本，而不是把数据交给云端。
 
+[GitHub](https://github.com/Goose-2950/WeQuota) · [Gitee](https://gitee.com/zhongdongdae/wequota)
+
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](#)
 [![Vue](https://img.shields.io/badge/Vue-3.5-42B883?logo=vue.js&logoColor=white)](#)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)](#)
@@ -138,7 +140,7 @@ WeQuota **不包含微信数据库解密代码**，不写微信源数据库，�
 ### 1. 安装依赖
 
 ```powershell
-git clone <your-repo-url> WeQuota
+git clone https://github.com/Goose-2950/WeQuota.git WeQuota
 cd WeQuota
 python -m venv .venv
 .venv\Scripts\Activate.ps1

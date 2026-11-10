@@ -5,7 +5,7 @@ Thanks for your interest in WeQuota.
 ## Development setup
 
 ```powershell
-git clone <repo-url> WeQuota
+git clone https://github.com/Goose-2950/WeQuota.git WeQuota
 cd WeQuota
 python -m venv .venv
 .venv\Scripts\Activate.ps1

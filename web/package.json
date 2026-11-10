@@ -1,0 +1,22 @@
+{
+  "name": "wequota-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WeQuota 数据大屏（Vue3 + ECharts）",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "echarts": "^5.5.1",
+    "gsap": "^3.15.1",
+    "vue": "^3.5.13",
+    "weui": "^2.6.26"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.0.7"
+  }
+}

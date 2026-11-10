@@ -1,0 +1,378 @@
+/* WeQuota · WeUI × GSAP dashboard
+ * WeUI 负责原生控件与 WeChat 视觉语言，GSAP 负责入场/滚动/交互动效。 */
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #eef3f0;
+  --surface: #ffffff;
+  --surface-2: #f6f9f7;
+  --surface-3: #edf3ef;
+  --border: #e1eae4;
+  --border-strong: #cfded5;
+  --text: #132019;
+  --muted: #65796d;
+  --faint: #91a49a;
+  --accent: #07c160;
+  --accent-strong: #06ad56;
+  --accent-soft: #e8f8ef;
+  --accent-ink: #ffffff;
+  --ok: #07c160;
+  --warn: #fa9d3b;
+  --danger: #fa5151;
+  --purple: #7c3aed;
+  --panel: var(--surface);
+  --panel-2: var(--surface-2);
+  --sidebar: #07120c;
+  --sidebar-2: #0b1c12;
+  --sidebar-text: #e3f2e9;
+  --sidebar-muted: #7b9585;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 1px 2px rgba(12, 32, 20, 0.04), 0 18px 42px rgba(12, 32, 20, 0.07);
+  --shadow-soft: 0 1px 2px rgba(12, 32, 20, 0.03), 0 8px 22px rgba(12, 32, 20, 0.045);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0a100d;
+  --surface: #121a15;
+  --surface-2: #18231d;
+  --surface-3: #1e2c24;
+  --border: #27372e;
+  --border-strong: #354a3e;
+  --text: #e9f5ee;
+  --muted: #8fa99a;
+  --faint: #6d8577;
+  --accent: #23d47a;
+  --accent-strong: #16b565;
+  --accent-soft: rgba(35, 212, 122, 0.13);
+  --accent-ink: #032214;
+  --ok: #22c55e;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --purple: #a78bfa;
+  --panel: var(--surface);
+  --panel-2: var(--surface-2);
+  --sidebar: #050a07;
+  --sidebar-2: #09130d;
+  --sidebar-text: #e0f0e6;
+  --sidebar-muted: #7f9b8b;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 22px 48px rgba(0, 0, 0, 0.3);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.24), 0 10px 26px rgba(0, 0, 0, 0.2);
+}
+
+/* WeUI 原生变量桥接：保留微信绿，同时接入项目深色模式。 */
+body,
+body[data-weui-theme='light'] {
+  --weui-BRAND-100: var(--accent);
+  --weui-BRAND-90: var(--accent-strong);
+  --weui-BRAND-80: var(--accent-strong);
+  --weui-BRAND-120: var(--accent);
+  --weui-BRAND-170: var(--accent-soft);
+  --weui-BRAND-BG-100: var(--accent);
+  --weui-BG-0: var(--bg);
+  --weui-BG-1: var(--surface-2);
+  --weui-BG-2: var(--surface);
+  --weui-BG-3: var(--surface-3);
+  --weui-BG-5: var(--surface);
+  --weui-FG-0: var(--text);
+  --weui-FG-0_5: var(--text);
+  --weui-FG-1: var(--muted);
+  --weui-FG-2: var(--faint);
+  --weui-FG-3: var(--border);
+  --weui-FG-4: var(--border-strong);
+  --weui-LINK-100: var(--accent-strong);
+  --weui-RED-100: var(--danger);
+  --weui-ORANGE-100: var(--warn);
+  --weui-DIALOG-LINE-COLOR: var(--border);
+}
+body[data-weui-theme='dark'] {
+  --weui-BG-0: var(--bg);
+  --weui-BG-1: var(--surface-2);
+  --weui-BG-2: var(--surface);
+  --weui-BG-3: var(--surface-3);
+  --weui-BG-5: var(--surface);
+  --weui-FG-0: var(--text);
+  --weui-FG-1: var(--muted);
+  --weui-FG-2: var(--faint);
+  --weui-FG-3: var(--border);
+  --weui-FG-4: var(--border-strong);
+  --weui-DIALOG-LINE-COLOR: var(--border);
+  --weui-BTN-DEFAULT-ACTIVE-BG: var(--surface-3);
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); overflow-x: clip; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+:where(button, input, select, textarea, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+a { color: var(--accent-strong); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1, h2, h3 { margin: 0; font-weight: 650; letter-spacing: -0.02em; text-wrap: balance; }
+
+::selection { background: var(--accent-soft); color: var(--text); }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid var(--bg);
+}
+::-webkit-scrollbar-track { background: transparent; }
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 12px;
+  padding: 26px 0;
+  text-align: center;
+}
+
+/* ---------- WeUI 原生组件皮肤 ---------- */
+.weui-panel {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+.weui-panel::before,
+.weui-panel::after,
+.weui-cells::before,
+.weui-cells::after,
+.weui-media-box::before,
+.weui-grids::before,
+.weui-grids::after,
+.weui-grid::before,
+.weui-grid::after { display: none; content: none; }
+.weui-panel__hd {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 20px 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.weui-panel__bd { padding: 0 20px 20px; color: var(--text); }
+.weui-panel__hd strong,
+.weui-panel__hd .panel-title {
+  display: block;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+.weui-panel__hd .panel-sub {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.panel-actions { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+
+.weui-cells { background: transparent; }
+.weui-cells__title { color: var(--muted); font-size: 12px; padding: 0 0 8px; }
+.weui-cells__tips {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.65;
+  padding: 8px 0 0;
+}
+.weui-cell { padding: 11px 0; color: var(--text); font-size: 13px; }
+.weui-cell::before { border-top-color: var(--border); }
+.weui-cell_access:active { background: var(--surface-2); }
+.weui-cell__ft { color: var(--faint); font-size: 11px; }
+.weui-label { width: auto; color: var(--muted); font-size: 12px; }
+.weui-input,
+.weui-textarea {
+  color: var(--text);
+  background: transparent;
+  font-size: 13px;
+}
+select.weui-input { height: 32px; border: 0; outline: 0; }
+.weui-input::placeholder,
+.weui-textarea::placeholder { color: var(--faint); }
+.weui-switch { border-color: var(--border-strong); background: var(--surface-3); }
+.weui-switch:checked { border-color: var(--accent-strong); background: var(--accent); }
+
+.weui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  height: 36px;
+  margin: 0;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 34px;
+}
+.weui-btn_block { display: flex; width: 100%; }
+.weui-btn:not(.weui-btn_icon)::after { border: 0; }
+.weui-btn_primary { background: var(--accent); color: var(--accent-ink); }
+.weui-btn_primary:not(.weui-btn_disabled):visited { color: var(--accent-ink); }
+.weui-btn_primary:not(.weui-btn_disabled):active { background: var(--accent-strong); }
+.weui-btn_default {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.weui-btn_default:not(.weui-btn_disabled):active { background: var(--surface-3); }
+.weui-btn_warn { background: var(--danger); color: #fff; }
+.weui-btn_mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 26px;
+}
+.weui-btn_icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0;
+}
+.weui-btn_icon:active { background: var(--surface-2); }
+.weui-btn_disabled,
+.weui-btn[disabled] { opacity: 0.55; }
+
+.weui-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 18px;
+}
+.weui-badge_warn { background: var(--warn); }
+.weui-badge_danger { background: var(--danger); }
+.weui-badge_plain {
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.weui-progress { display: flex; align-items: center; gap: 10px; }
+.weui-progress__bar {
+  height: 6px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--surface-3);
+}
+.weui-progress__inner-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+}
+.weui-progress__opr { flex: 0 0 auto; color: var(--muted); font-size: 11px; }
+
+.weui-search-bar { background: transparent; }
+.weui-search-bar::before,
+.weui-search-bar::after { display: none; content: none; }
+.weui-search-bar__form {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-2);
+}
+.weui-search-bar__box { padding-left: 30px; visibility: visible; }
+.weui-search-bar__box .weui-search-bar__input { color: var(--text); font-size: 12px; }
+.weui-search-bar__box .weui-icon-search { color: var(--faint); }
+.weui-search-bar__box .weui-icon-clear::before,
+.weui-search-bar__box .weui-icon-clear::after { background: var(--faint); }
+
+.weui-navbar { background: transparent; }
+.weui-navbar::after { border-bottom-color: var(--border); }
+.weui-navbar__item {
+  color: var(--muted);
+  font-size: 12px;
+}
+.weui-navbar__item.weui-bar__item_on { color: var(--accent-strong); font-weight: 600; }
+.weui-navbar__item::after { background: var(--accent); }
+
+.weui-toptips {
+  border-radius: 10px;
+  font-size: 12px;
+  background: var(--danger);
+}
+
+.weui-mask { background: rgba(5, 12, 8, 0.55); }
+.weui-dialog {
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.weui-dialog__hd { padding: 20px 22px 4px; }
+.weui-dialog__title { color: var(--text); font-size: 17px; }
+.weui-dialog__bd {
+  padding: 10px 22px 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.weui-dialog__ft { border-top-color: var(--border); }
+.weui-dialog__btn { color: var(--muted); font-size: 13px; }
+.weui-dialog__btn_primary { color: var(--accent-strong); }
+.weui-dialog__btn_warn { color: var(--danger); }
+
+.weui-tabbar { background: var(--surface); }
+.weui-grids { background: transparent; }
+.weui-grid { padding: 0; background: transparent; }
+.weui-grid__label { color: var(--muted); font-size: 11px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

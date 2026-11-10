@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "metering": {
+    "text_encoding": "cl100k_base",
+    "image_tile_size": 512,
+    "tokens_per_tile": 170,
+    "image_base_tokens": 85,
+    "default_image_width": 1024,
+    "default_image_height": 768,
+    "video_fps": 1.0,
+    "video_max_frames": 32,
+    "tokens_per_video_frame": 255,
+    "default_video_frames": 16,
+    "voice_call_rate": 25.0,
+    "video_call_rate": 255.0,
+    "call_duplex_factor": 2,
+    "voice_fallback_rate": 25.0
+  },
+  "alert": {
+    "desktop_enabled": true,
+    "email_enabled": false,
+    "smtp_host": "",
+    "smtp_port": 465,
+    "smtp_user": "",
+    "smtp_password": "",
+    "smtp_security": "ssl",
+    "smtp_use_tls": true,
+    "email_from": "",
+    "email_to": [],
+    "dashboard_enabled": true,
+    "cooldown_seconds": 300,
+    "quiet_hours": null
+  },
+  "whisper": {
+    "enabled": true,
+    "model_size": "tiny",
+    "model_dir": "",
+    "model_revision": "",
+    "device": "auto",
+    "compute_type": "int8",
+    "language": "zh",
+    "beam_size": 1,
+    "auto_download": true
+  },
+  "quota": {
+    "default_limit_tokens": 50000
+  },
+  "app": {
+    "allow_mock_ingest": true,
+    "auth_token": "",
+    "cors_origins": []
+  },
+  "backup": {
+    "enabled": true,
+    "keep": 3,
+    "dir": ""
+  },
+  "collector": {
+    "enabled": true,
+    "account_id": "wxid_demo",
+    "binary": "",
+    "auto_install": true,
+    "cli_version": "",
+    "cli_ref": "",
+    "poll_interval_s": 15.0,
+    "sleep_interval_s": 60.0,
+    "catchup_days": 3,
+    "max_failures": 3,
+    "limit_per_poll": 500,
+    "auto_start": true,
+    "include_groups": false,
+    "full_backfill": true,
+    "full_backfill_limit": 5000,
+    "cache_dir": ""
+  }
+}

@@ -1,0 +1,31 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Runtime data and secrets
+data/
+models/
+config.json
+*.log
+
+# Frontend
+web/node_modules/
+web/dist/
+wequota/webapp/
+
+# Bundled/ignored runtime assets
+assets/models/
+vendor/
+
+# Local/dev scratch
+.tmp/
+.tmp-*/
+.opencode/
+.pytest_cache/
+.DS_Store
+Thumbs.db
